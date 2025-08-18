@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Banner Section -->
+    <header class="banner">
+        <div class="banner-content">
+            <h1>Your Name</h1>
+            <p>Web Developer & Designer</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- First Content Box -->
+        <div class="content-box" onclick="toggleExpansion(this)">
+            <div class="box-header">
+                <h2>Project 1</h2>
+                <div class="expand-icon">+</div>
+            </div>
+            <div class="box-content">
+                <img src="https://via.placeholder.com/400x300/4A90E2/FFFFFF?text=Project+1" alt="Project 1" class="project-image">
+                <div class="project-description">
+                    <p>This is a description of your first project. Click to learn more about what you've built and the technologies you used.</p>
+                    <div class="project-details">
+                        <h3>Technologies Used:</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <h3>Project Overview:</h3>
+                        <p>This project demonstrates your skills in front-end development and showcases your ability to create responsive, user-friendly web applications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Content Box -->
+        <div class="content-box" onclick="toggleExpansion(this)">
+            <div class="box-header">
+                <h2>Project 2</h2>
+                <div class="expand-icon">+</div>
+            </div>
+            <div class="box-content">
+                <img src="https://via.placeholder.com/400x300/50C878/FFFFFF?text=Project+2" alt="Project 2" class="project-image">
+                <div class="project-description">
+                    <p>This is a description of your second project. Click to expand and see more details about your work.</p>
+                    <div class="project-details">
+                        <h3>Technologies Used:</h3>
+                        <ul>
+                            <li>React</li>
+                            <li>Node.js</li>
+                            <li>MongoDB</li>
+                        </ul>
+                        <h3>Project Overview:</h3>
+                        <p>This project showcases your full-stack development capabilities and demonstrates your understanding of modern web technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
