@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+<body id="body">
+    <!-- Control Buttons -->
+    <div class="control-buttons">
+        <!-- Low Detail Mode Toggle -->
+        <button class="low-detail-toggle" id="low-detail-toggle" aria-label="Toggle low detail mode">
+            <svg id="low-detail-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3h18v18H3zM9 9h6v6H9z"/>
+            </svg>
+            <svg id="high-detail-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M3 3h18v18H3zM9 9h6v6H9zM15 3v6M9 15v6M3 9h6M15 15h6"/>
+            </svg>
+        </button>
+        
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Banner Section -->
+    <header class="banner">
+        <div class="banner-content">
+            <h1>{{ site.author }}</h1>
+            <p>Software</p>
+            <a href="#projects" class="banner-cta">
+                <span>View My Work</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {{ content }}
+    </main>
+
+    <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
+</body>
+</html>

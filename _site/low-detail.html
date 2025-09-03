@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Low Detail Mode</title>
+    <meta name="description" content="A minimal, fast-loading version of the portfolio">
+    <style>
+        /* Minimal CSS for low detail mode */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            color: #000;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+            color: #000;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .project {
+            border: 1px solid #ccc;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f9f9f9;
+        }
+        
+        .project h3 {
+            margin-top: 0;
+        }
+        
+        .tech-tags {
+            margin: 0.5rem 0;
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background: #e0e0e0;
+            color: #333;
+            padding: 0.25rem 0.5rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 3px;
+            margin-bottom: 2rem;
+        }
+        
+        .back-link:hover {
+            background: #333;
+        }
+        
+        .description {
+            margin: 1rem 0;
+            color: #555;
+        }
+        
+        .technologies {
+            margin-top: 1rem;
+        }
+        
+        .technologies h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+        
+        .technologies ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .technologies li {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #333;
+            padding: 0.25rem 0.5rem;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #000;
+                color: #fff;
+            }
+            
+            h1, h2, h3, h4 {
+                color: #fff;
+            }
+            
+            p, .description {
+                color: #ccc;
+            }
+            
+            .project {
+                background: #1a1a1a;
+                border-color: #333;
+            }
+            
+            .tech-tag, .technologies li {
+                background: #2a2a2a;
+                color: #ccc;
+            }
+            
+            .back-link {
+                background: #fff;
+                color: #000;
+            }
+            
+            .back-link:hover {
+                background: #ccc;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Full Site</a>
+    
+    <h1>Portfolio - Low Detail Mode</h1>
+    <p>This is a minimal, fast-loading version of the portfolio optimized for slow connections.</p>
+    
+    <h2>Featured Projects</h2>
+    
+    <div class="project">
+        <h3>Project 1</h3>
+        <div class="tech-tags">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">MongoDB</span>
+        </div>
+        <div class="description">
+            <p>A modern web application built with React and Node.js, featuring real-time updates and responsive design.</p>
+        </div>
+        <div class="technologies">
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>React</li>
+                <li>Node.js</li>
+                <li>MongoDB</li>
+                <li>Express</li>
+                <li>Socket.io</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="project">
+        <h3>Project 2</h3>
+        <div class="tech-tags">
+            <span class="tech-tag">Vue.js</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">PostgreSQL</span>
+        </div>
+        <div class="description">
+            <p>An e-commerce platform with advanced search functionality and payment integration.</p>
+        </div>
+        <div class="technologies">
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>Vue.js</li>
+                <li>Python</li>
+                <li>PostgreSQL</li>
+                <li>Django</li>
+                <li>Stripe</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="project">
+        <h3>Project 3</h3>
+        <div class="tech-tags">
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">HTML5</span>
+        </div>
+        <div class="description">
+            <p>A responsive portfolio website with smooth animations and modern design principles.</p>
+        </div>
+        <div class="technologies">
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>JavaScript</li>
+                <li>CSS3</li>
+                <li>HTML5</li>
+                <li>GSAP</li>
+                <li>Webpack</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="project">
+        <h3>Project 4</h3>
+        <div class="tech-tags">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Redux</span>
+        </div>
+        <div class="description">
+            <p>A cross-platform mobile application for task management with offline capabilities.</p>
+        </div>
+        <div class="technologies">
+            <h4>Technologies Used</h4>
+            <ul>
+                <li>React Native</li>
+                <li>Firebase</li>
+                <li>Redux</li>
+                <li>AsyncStorage</li>
+                <li>React Navigation</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        // Minimal JavaScript for low detail mode
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simple click tracking (optional)
+            const projects = document.querySelectorAll('.project');
+            projects.forEach(project => {
+                project.addEventListener('click', function() {
+                    console.log('Project clicked:', this.querySelector('h3').textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

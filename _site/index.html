@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <meta name="description" content="A modern portfolio website built with Jekyll">
+    
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+<body id="body">
+    <!-- Control Buttons -->
+    <div class="control-buttons">
+        <!-- Low Detail Mode Toggle -->
+        <button class="low-detail-toggle" id="low-detail-toggle" aria-label="Toggle low detail mode">
+            <svg id="low-detail-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3h18v18H3zM9 9h6v6H9z"/>
+            </svg>
+            <svg id="high-detail-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M3 3h18v18H3zM9 9h6v6H9zM15 3v6M9 15v6M3 9h6M15 15h6"/>
+            </svg>
+        </button>
+        
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Banner Section -->
+    <header class="banner">
+        <div class="banner-content">
+            <h1>Ben Huang</h1>
+            <p>Software</p>
+            <a href="#projects" class="banner-cta">
+                <span>View My Work</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="projects-section" id="projects">
+    <div class="section-title">
+        <h2>Featured Projects</h2>
+        <p>Explore my latest work and creative solutions</p>
+    </div>
+    
+    <div class="projects-grid">
+        
+        
+        
+        <a class="project-card" href="https://github.com/benhuang3/gpgraph" target="_blank" rel="noopener noreferrer">
+            <div class="project-image">
+                <img src="/assets/images/graph.png" alt="GPGraph: GPU Graph Processing" loading="lazy">
+            </div>
+            <div class="project-title">
+                <h3>GPGraph: GPU Graph Processing</h3>
+                
+                <p class="project-subtitle">High-performance CUDA library for graph algorithms and processing.
+</p>
+                
+                
+                <div class="project-tech">
+                    
+                    <span class="tech-tag">Cuda</span>
+                    
+                    <span class="tech-tag">C</span>
+                    
+                    <span class="tech-tag">C++</span>
+                    
+                    
+                </div>
+                
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>High-performance CUDA library for graph algorithms and processing.</p>
+
+<p>This project demonstrates your skills in front-end development and showcases your ability to create responsive, user-friendly web applications. It includes modern design principles, accessibility features, and cross-browser compatibility.</p>
+
+                </div>
+                
+                <div class="project-details">
+                    <h4>Technologies Used</h4>
+                    <ul>
+                        
+                        <li>Cuda</li>
+                        
+                        <li>C</li>
+                        
+                        <li>C++</li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </a>
+        
+        
+        
+        <a class="project-card" href="https://github.com/benhuang3/QBI_Hackathon_2025" target="_blank" rel="noopener noreferrer">
+            <div class="project-image">
+                <img src="/assets/images/protein.jpg" alt="DECODE: " loading="lazy">
+            </div>
+            <div class="project-title">
+                <h3>DECODE: </h3>
+                
+                <p class="project-subtitle">Full‑stack MERN app with responsive UI and a robust Node/Express API.
+</p>
+                
+                
+                <div class="project-tech">
+                    
+                    <span class="tech-tag">Python</span>
+                    
+                    <span class="tech-tag">Torch</span>
+                    
+                    <span class="tech-tag">Evo2</span>
+                    
+                    
+                </div>
+                
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>Full‑stack MERN app with responsive UI and a robust Node/Express API.</p>
+
+<p>This is a description of your second project. Click to expand and see more details about your work.</p>
+
+<p>This project showcases your full-stack development capabilities and demonstrates your understanding of modern web technologies. It features a responsive frontend built with React, a robust backend API, and efficient database management.</p>
+
+                </div>
+                
+                <div class="project-details">
+                    <h4>Technologies Used</h4>
+                    <ul>
+                        
+                        <li>Python</li>
+                        
+                        <li>Torch</li>
+                        
+                        <li>Evo2</li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </a>
+        
+        
+        
+        <a class="project-card" href="https://github.com/haejinjo/mara-hackathon" target="_blank" rel="noopener noreferrer">
+            <div class="project-image">
+                <img src="/assets/images/bitcoin.png" alt="Hashrate Mining Optimizer" loading="lazy">
+            </div>
+            <div class="project-title">
+                <h3>Hashrate Mining Optimizer</h3>
+                
+                <p class="project-subtitle">Data driven Reinforcement Learning application to provide intelligent hashrate predictions
+</p>
+                
+                
+                <div class="project-tech">
+                    
+                    <span class="tech-tag">Python</span>
+                    
+                    <span class="tech-tag">Torch</span>
+                    
+                    
+                </div>
+                
+            </div>
+            <div class="project-content">
+                <div class="project-description">
+                    <p>Data driven Reinforcement Learning application to provide intelligent hashrate predictions</p>
+
+<p>This is a description of your third project. Click to expand and see more details about your work.</p>
+
+<p>This project demonstrates your expertise in Python web development and database design. It includes advanced features like user authentication, data visualization, and RESTful API endpoints.</p>
+
+                </div>
+                
+                <div class="project-details">
+                    <h4>Technologies Used</h4>
+                    <ul>
+                        
+                        <li>Python</li>
+                        
+                        <li>Torch</li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </a>
+        
+    </div>
+</div>
+
+    </main>
+
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>

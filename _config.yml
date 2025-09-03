@@ -1,3 +1,31 @@
-theme: jekyll-theme-minimal
-title: Octocat's homepage
-description: Bookmark this to keep an eye on my project updates!
+title: Portfolio
+description: A modern portfolio website built with Jekyll
+author: Ben Huang
+email: benhua476@berkeley.edu
+baseurl: ""
+url: "https://benhuang3.github.io"
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+plugins:
+  - jekyll-feed
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
