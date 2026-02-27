@@ -1,5 +1,5 @@
-title: Portfolio
-description: A modern portfolio website built with Jekyll
+title: "~*~ Ben Huang's Homepage ~*~"
+description: "Welcome to my GeoCities homepage! Software Developer from Berkeley"
 author: Ben Huang
 email: benhua476@berkeley.edu
 role: Software Developer
@@ -15,18 +15,4 @@ plugins:
 # Collections
 collections:
   projects:
-    output: true
-    permalink: /projects/:name/
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "projects"
-    values:
-      layout: "project"
+    output: false

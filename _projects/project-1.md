@@ -1,10 +1,10 @@
 ---
-title: "GPGraph: GPU Graph Processing"
-image: "/assets/images/graph.png"
-technologies: ["Cuda", "C", "C++"]
-link: https://github.com/benhuang3/gpgraph
+title: "Worldcraft"
+image: "/assets/images/worldcraft.jpg"
+technologies: ["Python", "PyTorch", "NeRF", "FastAPI"]
+link: https://worldcraft-org.github.io/worldcraft.github.io/
 ---
 
-High-performance CUDA library for graph algorithms and processing.
+Converts real-world scenes into Minecraft worlds using computer vision and neural radiance fields.
 
-This project demonstrates your skills in front-end development and showcases your ability to create responsive, user-friendly web applications. It includes modern design principles, accessibility features, and cross-browser compatibility.
+Worldcraft processes photographs through a four-stage pipeline — semantic segmentation with Mask2Former, NeRF training via Nerfstudio, point cloud voxelization, and Minecraft block conversion — to create playable 3D worlds from real-life images.

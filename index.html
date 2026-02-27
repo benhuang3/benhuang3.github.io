@@ -1,53 +1,129 @@
 ---
-layout: default
+permalink: /index.html
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.author }}</title>
+    <script>
+        // If user has a saved preference, redirect immediately
+        var mode = localStorage.getItem('siteMode');
+        if (mode === 'modern') window.location.replace('/modern.html');
+        else if (mode === 'retro') window.location.replace('/retro.html');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<div class="projects-section" id="projects">
-    <div class="section-title">
-        <h2>Featured Projects</h2>
-        <p>Explore my latest work and creative solutions</p>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+        }
+
+        .landing {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .landing h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .landing p {
+            color: #8b949e;
+            font-size: 1.1rem;
+            margin-bottom: 48px;
+        }
+
+        .choices {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .choice {
+            display: block;
+            width: 260px;
+            padding: 32px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #e6edf3;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .choice:hover {
+            transform: translateY(-4px);
+        }
+
+        .choice-retro {
+            background: linear-gradient(135deg, #1a1a4e 0%, #2d1a4e 100%);
+            border: 2px solid #5544aa;
+        }
+
+        .choice-retro:hover {
+            box-shadow: 0 8px 30px rgba(85, 68, 170, 0.4);
+        }
+
+        .choice-modern {
+            background: linear-gradient(135deg, #0d2137 0%, #0a2a1a 100%);
+            border: 2px solid #238636;
+        }
+
+        .choice-modern:hover {
+            box-shadow: 0 8px 30px rgba(35, 134, 54, 0.4);
+        }
+
+        .choice-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .choice h2 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .choice .desc {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+
+        .remember {
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: #484f58;
+        }
+    </style>
+</head>
+<body>
+    <div class="landing">
+        <h1>{{ site.author }}</h1>
+        <p>Choose your experience</p>
+
+        <div class="choices">
+            <a class="choice choice-retro" href="/retro.html" onclick="localStorage.setItem('siteMode','retro')">
+                <div class="choice-icon">&#128190;</div>
+                <h2>Retro</h2>
+                <p class="desc">GeoCities-inspired, nostalgic 90s vibes</p>
+            </a>
+
+            <a class="choice choice-modern" href="/modern.html" onclick="localStorage.setItem('siteMode','modern')">
+                <div class="choice-icon">&#10024;</div>
+                <h2>Modern</h2>
+                <p class="desc">Clean, minimal, contemporary design</p>
+            </a>
+        </div>
+
+        <p class="remember">Your choice will be remembered for next time</p>
     </div>
-    
-    <div class="projects-grid">
-        {% for project in site.projects %}
-        {% assign href_url = project.link | default: project.url %}
-        {% assign is_external = href_url contains '://' %}
-        <a class="project-card" href="{% if is_external %}{{ href_url }}{% else %}{{ href_url | relative_url }}{% endif %}" {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>
-            <div class="project-image">
-                <img src="{{ project.image | relative_url }}" alt="{{ project.title }}" loading="lazy">
-            </div>
-            <div class="project-title">
-                <h3>{{ project.title }}</h3>
-                {% if project.content %}
-                <p class="project-subtitle">{{ project.excerpt | strip_html | truncate: 120 }}</p>
-                {% endif %}
-                {% if project.technologies %}
-                <div class="project-tech">
-                    {% for tech in project.technologies limit:3 %}
-                    <span class="tech-tag">{{ tech }}</span>
-                    {% endfor %}
-                    {% if project.technologies.size > 3 %}
-                    <span class="tech-tag">+{{ project.technologies.size | minus: 3 }} more</span>
-                    {% endif %}
-                </div>
-                {% endif %}
-            </div>
-            <div class="project-content">
-                <div class="project-description">
-                    {{ project.content }}
-                </div>
-                {% if project.technologies %}
-                <div class="project-details">
-                    <h4>Technologies Used</h4>
-                    <ul>
-                        {% for tech in project.technologies %}
-                        <li>{{ tech }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-</div>
+</body>
+</html>

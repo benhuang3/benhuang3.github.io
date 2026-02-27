@@ -1,12 +1,12 @@
 ---
-title: "Hashrate Mining Optimizer"
-image: "/assets/images/bitcoin.png"
-technologies: ["Python", "Torch"]
-link: https://github.com/haejinjo/mara-hackathon
+title: "DECODE: "
+image: "/assets/images/protein.jpg"
+technologies: ["Python", "Torch", "Evo2"]
+link: https://github.com/benhuang3/QBI_Hackathon_2025
 ---
 
-Data driven Reinforcement Learning application to provide intelligent hashrate predictions
+Full‑stack MERN app with responsive UI and a robust Node/Express API.
 
-This is a description of your third project. Click to expand and see more details about your work.
+This is a description of your second project. Click to expand and see more details about your work.
 
-This project demonstrates your expertise in Python web development and database design. It includes advanced features like user authentication, data visualization, and RESTful API endpoints.
+This project showcases your full-stack development capabilities and demonstrates your understanding of modern web technologies. It features a responsive frontend built with React, a robust backend API, and efficient database management.
