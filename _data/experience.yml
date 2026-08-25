@@ -1,0 +1,34 @@
+# Work / research experience, newest first.
+#
+# Every entry below is a PLACEHOLDER — replace the TODO strings with your real
+# history, and delete any entry you do not need. Nothing here is real yet.
+#
+# Intended shape, filled in:
+#
+#   - role: "Software Engineering Intern"
+#     org: "Acme Robotics"
+#     date: "Jun 2025 – Aug 2025"
+#     points:
+#       - "Built an internal service in Python/FastAPI that replaced a manual
+#          spreadsheet process used by the ops team."
+#       - "Cut nightly batch runtime from 40 minutes to 6 by rewriting the hot
+#          path and parallelising the export step."
+#       - "Wrote the integration test suite that now gates every deploy."
+#
+# Style notes for the points: one line each, start with a verb, say what you
+# built and what changed because of it. Numbers help — use real ones only.
+
+- role: "TODO: Job title, e.g. Software Engineering Intern"
+  org: "TODO: Company or lab name, e.g. Acme Robotics"
+  date: "TODO: Start – end, e.g. Jun 2025 – Aug 2025"
+  points:
+    - "TODO: What you built or owned, and the technology you used."
+    - "TODO: A measurable result — latency, throughput, cost, users, or scope."
+    - "TODO: Optional third point — collaboration, ownership, or something shipped."
+
+- role: "TODO: Second role — e.g. Undergraduate Researcher, or delete this entry"
+  org: "TODO: Organization, e.g. a UC Berkeley lab or a student org"
+  date: "TODO: Start – end, e.g. Jan 2025 – May 2025"
+  points:
+    - "TODO: What the work was and your specific contribution to it."
+    - "TODO: The outcome — a paper, a tool others use, a demo, a result."

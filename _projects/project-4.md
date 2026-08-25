@@ -3,10 +3,14 @@ title: "Hashrate Mining Optimizer"
 image: "/assets/images/bitcoin.png"
 technologies: ["Python", "Torch"]
 link: https://github.com/haejinjo/mara-hackathon
+repo: https://github.com/haejinjo/mara-hackathon
+year: "TODO"
+role: "TODO: your role"
+summary: "A reinforcement learning system that predicts and allocates mining hashrate from operational data."
 ---
 
-Data driven Reinforcement Learning application to provide intelligent hashrate predictions
+A reinforcement learning system that predicts and allocates mining hashrate from operational data.
 
-This is a description of your third project. Click to expand and see more details about your work.
+Built in Python with PyTorch for the MARA hackathon, the project frames hashrate allocation as a sequential decision problem: an agent observes operating conditions and learns a policy for how much hashrate to commit, rather than reacting with fixed thresholds. Mining is a natural fit for RL because the trade-off between energy cost and yield shifts continuously, so a learned policy can adapt where static heuristics cannot.
 
-This project demonstrates your expertise in Python web development and database design. It includes advanced features like user authentication, data visualization, and RESTful API endpoints.
+TODO: describe the data the agent was trained on and the reward signal used, plus how the policy compared against a simple baseline.

@@ -1,5 +1,5 @@
-title: "~*~ Ben Huang's Homepage ~*~"
-description: "Welcome to my GeoCities homepage! Software Developer from Berkeley"
+title: "Ben Huang"
+description: "Ben Huang — software developer at UC Berkeley. Machine learning, GPU and systems performance, and full-stack engineering."
 author: Ben Huang
 email: benhua476@berkeley.edu
 role: Software Developer
@@ -12,7 +12,17 @@ permalink: pretty
 plugins:
   - jekyll-feed
 
+sass:
+  style: compressed
+
 # Collections
 collections:
   projects:
     output: false
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .jekyll-cache
+  - README.md

@@ -1,0 +1,20 @@
+# Copy for the About section and the contact links.
+
+tagline: "Software Developer — machine learning, systems performance, and things that ship."
+
+blurb: >
+  I'm Ben, a software developer at UC Berkeley (TODO: add your major and expected
+  graduation year). My work runs from computer vision and machine learning — turning
+  photographs into 3D worlds, applying foundation models to biological sequence data —
+  down to GPU and systems performance in CUDA, with a run of full-stack hackathon
+  projects in between. I like problems where the modelling and the engineering both
+  have to be right for the thing to work at all.
+  TODO: add a closing line about what you're looking for, e.g. "Currently looking for
+  Summer 2027 software engineering internships."
+
+location: "TODO: e.g. Berkeley, CA"
+resume_url: "TODO: path to your resume PDF, e.g. /assets/ben-huang-resume.pdf"
+
+github: "https://github.com/benhuang3"
+linkedin: "TODO: your LinkedIn URL"
+email: "benhua476@berkeley.edu"

@@ -1,0 +1,1433 @@
+@charset "UTF-8";
+/* ==========================================================================
+   benhuang3.github.io — main stylesheet
+   Warm "paper" light mode · deep forest-black dark mode · mauve accent.
+   Single file, no frameworks, no remote fonts.
+
+   CONTENTS
+     01. Reset
+     02. Design tokens (light)
+     03. Design tokens (dark: explicit + system preference)
+     04. Base elements & typography
+     05. Utilities  (.container .section .section-title .btn .sr-only)
+     06. Site nav   (.site-nav .nav-title .nav-links .nav-toggle .theme-toggle)
+     07. Hero       (#about)
+     08. Skills & tag pills
+     09. Timeline   (#experience)
+     10. Cards      (#projects)
+     11. Contact & footer
+     12. Responsive (1024 / 768 / 480 / 360)
+     13. Reduced motion
+     14. Print
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd,
+ul, ol { margin: 0; }
+
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg { display: block; max-width: 100%; }
+
+img { height: auto; }
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a { color: inherit; }
+
+:target { scroll-margin-top: calc(var(--nav-height) + 1rem); }
+
+
+/* ==========================================================================
+   02. DESIGN TOKENS — light ("warm cream paper")
+   ========================================================================== */
+
+:root {
+  /* colour */
+  --bg:           #f1ede5;
+  --bg-tint:      rgba(239, 230, 239, .35);
+  --card-bg:      rgba(241, 237, 229, .96);
+  --nav-bg:       rgba(241, 237, 229, .78);
+  --text:         #4b3f33;                    /* 8.7:1 on --bg */
+  --text-strong:  #332b22;
+  --text-muted:   #6e6160;                    /* 5.1:1 on --bg */
+  --heading:      #6e6160;
+  --accent:       #7a637f;                    /* muted mauve  */
+  --accent-hover: #5e4d62;
+  --accent-soft:  rgba(122, 99, 127, .12);    /* washes, glows */
+  --link:         var(--accent);              /* 4.6:1 on --bg */
+  --link-hover:   var(--accent-hover);
+  --link-line:    rgba(122, 99, 127, .70);
+  --link-line-hi: rgba(122, 99, 127, .95);
+  --on-accent:    #ffffff;                    /* text on an --accent fill */
+  --pill:         #7e66bb;                    /* darkened from #8e79c4 — see §08 */
+  --pill-text:    #ffffff;
+  --pill-text-dk: #2f2a26;                    /* for pale pill fills */
+  --border:       rgba(110, 97, 96, .18);
+  --border-solid: rgba(110, 97, 96, .32);
+
+  /* elevation */
+  --shadow:     0 16px 45px rgba(76, 53, 67, .22);
+  --shadow-sm:  0 6px 16px rgba(76, 53, 67, .16);
+  --shadow-lg:  0 22px 60px rgba(76, 53, 67, .30);
+
+  /* type */
+  --font-body: verdana, "Segoe UI", "Avenir Next", avenir, nunito, inter,
+               "Helvetica Neue", Arial, sans-serif;
+  --font-head: georgia, "Times New Roman", serif;
+  --heading-glow: 0 0 8px rgba(122, 99, 127, .12);
+
+  /* geometry */
+  --nav-height:  5.5rem;
+  --radius:      1.35rem;
+  --radius-sm:   .85rem;
+  --measure:     60rem;
+  --gutter:      2rem;
+  --media-col:   150px;   /* fixed card image column */
+
+  /* motion */
+  --ease:  .25s ease;
+  --ease-fast: .2s ease;
+
+  color-scheme: light;
+}
+
+
+/* ==========================================================================
+   03. DESIGN TOKENS — dark ("deep green-black")
+   Explicit choice wins; system preference applies only when unset.
+   The attribute may live on <html> or <body>; both are supported.
+   ========================================================================== */
+
+html[data-theme="dark"],
+body[data-theme="dark"] {
+  --bg:           #181f16;
+  --bg-tint:      rgba(47, 43, 51, .35);
+  --card-bg:      rgba(67, 60, 54, .94);
+  --nav-bg:       rgba(24, 31, 22, .78);
+  --text:         #d4c9be;                    /* 10.3:1 on --bg */
+  --text-strong:  #e8e0d6;
+  --text-muted:   rgba(195, 183, 168, .82);
+  --heading:      #c3b7a8;
+  --accent:       #af94a2;                    /* decorative mauve, 6.1:1 */
+  --accent-hover: #997789;
+  --accent-soft:  rgba(175, 148, 162, .16);
+  --link:         #c0a7b3;                    /* lifted for card-bg contrast */
+  --link-hover:   #d8c6ce;
+  --link-line:    rgba(192, 167, 179, .60);
+  --link-line-hi: rgba(216, 198, 206, .95);
+  --on-accent:    #181f16;
+  --border:       rgba(195, 183, 168, .22);
+  --border-solid: rgba(195, 183, 168, .38);
+
+  --shadow:     0 16px 45px rgba(0, 0, 0, .26);
+  --shadow-sm:  0 6px 16px rgba(0, 0, 0, .18);
+  --shadow-lg:  0 22px 60px rgba(0, 0, 0, .38);
+
+  --heading-glow: 0 0 10px rgba(175, 148, 162, .10);
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Same overrides, but only when no explicit light choice is stored on
+     either <html> or <body>. :has() guards the html-level selector against a
+     light choice recorded one level down. */
+  html:not([data-theme="light"]):not(:has(body[data-theme="light"])),
+  html:not([data-theme="light"]) body:not([data-theme="light"]) {
+    --bg:           #181f16;
+    --bg-tint:      rgba(47, 43, 51, .35);
+    --card-bg:      rgba(67, 60, 54, .94);
+    --nav-bg:       rgba(24, 31, 22, .78);
+    --text:         #d4c9be;
+    --text-strong:  #e8e0d6;
+    --text-muted:   rgba(195, 183, 168, .82);
+    --heading:      #c3b7a8;
+    --accent:       #af94a2;
+    --accent-hover: #997789;
+    --accent-soft:  rgba(175, 148, 162, .16);
+    --link:         #c0a7b3;
+    --link-hover:   #d8c6ce;
+    --link-line:    rgba(192, 167, 179, .60);
+    --link-line-hi: rgba(216, 198, 206, .95);
+    --on-accent:    #181f16;
+    --border:       rgba(195, 183, 168, .22);
+    --border-solid: rgba(195, 183, 168, .38);
+
+    --shadow:     0 16px 45px rgba(0, 0, 0, .26);
+    --shadow-sm:  0 6px 16px rgba(0, 0, 0, .18);
+    --shadow-lg:  0 22px 60px rgba(0, 0, 0, .38);
+
+    --heading-glow: 0 0 10px rgba(175, 148, 162, .10);
+
+    color-scheme: dark;
+  }
+}
+
+
+/* ==========================================================================
+   04. BASE ELEMENTS & TYPOGRAPHY
+   ========================================================================== */
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--ease), color var(--ease);
+}
+
+/* Ambient glow behind the dark theme. */
+html[data-theme="dark"] body,
+body[data-theme="dark"] {
+  background-image:
+    radial-gradient(circle at 12% 12%, rgba(175, 148, 162, .08), transparent 14%),
+    radial-gradient(circle at 88% 18%, rgba(195, 183, 168, .06), transparent 16%),
+    radial-gradient(circle at 44% 78%, rgba(175, 148, 162, .05), transparent 20%);
+  background-attachment: fixed;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]):not(:has(body[data-theme="light"])) body:not([data-theme="light"]) {
+    background-image:
+      radial-gradient(circle at 12% 12%, rgba(175, 148, 162, .08), transparent 14%),
+      radial-gradient(circle at 88% 18%, rgba(195, 183, 168, .06), transparent 16%),
+      radial-gradient(circle at 44% 78%, rgba(175, 148, 162, .05), transparent 20%);
+    background-attachment: fixed;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  color: var(--heading);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+h1, h2 {
+  letter-spacing: .02em;
+  text-shadow: var(--heading-glow);
+}
+
+h1 { font-size: clamp(2rem, 1.35rem + 2.6vw, 3.1rem); }
+h2 { font-size: clamp(1.55rem, 1.2rem + 1.5vw, 2.15rem); }
+h3 { font-size: clamp(1.15rem, 1.05rem + .45vw, 1.4rem); }
+
+p, ul, ol, blockquote, figure { margin-bottom: 1.5rem; }
+
+p:last-child,
+ul:last-child,
+ol:last-child { margin-bottom: 0; }
+
+strong { color: var(--text-strong); font-weight: 700; }
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--link-line);
+  text-underline-offset: .2em;
+  transition: color var(--ease-fast), text-decoration-color var(--ease-fast);
+}
+
+a:hover,
+a:focus {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-line-hi);
+}
+
+blockquote {
+  border-left: 4px solid var(--accent-soft);
+  background: var(--bg-tint);
+  border-radius: var(--radius-sm);
+  padding: .85rem 1rem;
+  margin-left: 0;
+  color: var(--text-strong);
+}
+
+code, pre, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .92em;
+}
+
+code {
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  border-radius: .35rem;
+  padding: .1em .35em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 3rem 0;
+}
+
+/* Visible focus for every interactive element. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: .25rem;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-strong);
+}
+
+
+/* ==========================================================================
+   05. UTILITIES
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  padding: 4.5rem 0;
+  scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.section + .section { border-top: 1px solid var(--border); }
+
+.section-title {
+  font-size: clamp(1.55rem, 1.2rem + 1.5vw, 2.15rem);
+  margin: 0 0 2rem;
+  position: relative;
+  padding-bottom: .6rem;
+}
+
+/* Short accent rule under each section heading. */
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 3rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+  opacity: .75;
+}
+
+.content { display: block; }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link: off-screen until it takes keyboard focus, then it drops into
+   the top-left corner as a normal-looking button. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  transform: translateY(-150%);
+  padding: .7rem 1.2rem;
+  border: 1px solid var(--accent);
+  border-radius: 0 0 .75rem 0;
+  background: var(--card-solid, var(--bg));
+  color: var(--link);
+  font-weight: 700;
+  font-size: .9rem;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform var(--ease);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Buttons ---------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .7rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--ease), box-shadow var(--ease),
+              background-color var(--ease-fast), color var(--ease-fast),
+              border-color var(--ease-fast);
+}
+
+.btn:hover,
+.btn:focus-visible { transform: translateY(-2px); text-decoration: none; }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--accent-hover);
+  color: var(--on-accent);
+  box-shadow: var(--shadow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--link);
+  border-color: var(--border-solid);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus {
+  color: var(--link-hover);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+
+/* ==========================================================================
+   06. SITE NAV
+   Sticky, translucent, blurred backdrop; collapses to a hamburger panel
+   below 768px (see §12).
+   ========================================================================== */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
+  transition: background-color var(--ease), border-color var(--ease);
+}
+
+/* Browsers without backdrop-filter get an opaque bar instead of mush. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-nav { background: var(--bg); }
+}
+
+.site-nav > .container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: var(--nav-height);
+}
+
+.nav-title {
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  text-decoration: none;
+  margin-right: auto;
+  white-space: nowrap;
+}
+
+.nav-title:hover,
+.nav-title:focus { color: var(--link-hover); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: .45rem .8rem;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--ease-fast), background-color var(--ease-fast);
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--link-hover);
+  background: var(--accent-soft);
+}
+
+.nav-link[aria-current="page"],
+.nav-link.is-active { color: var(--link); }
+
+/* Theme toggle ----------------------------------------------------------- */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  transition: color var(--ease-fast), background-color var(--ease-fast),
+              border-color var(--ease-fast), transform var(--ease);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--link-hover);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: rotate(-12deg);
+}
+
+.theme-toggle svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Exactly one icon at a time: the icon shows the theme you'd switch TO.
+   Light theme → moon.  Dark theme → sun. */
+.icon-sun  { display: none; }
+.icon-moon { display: block; }
+
+html[data-theme="dark"] .icon-sun,
+body[data-theme="dark"] .icon-sun   { display: block; }
+html[data-theme="dark"] .icon-moon,
+body[data-theme="dark"] .icon-moon  { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]):not(:has(body[data-theme="light"])) .icon-sun  { display: block; }
+  html:not([data-theme="light"]):not(:has(body[data-theme="light"])) .icon-moon { display: none; }
+  /* An explicit light choice on <body> still wins. */
+  body[data-theme="light"] .icon-sun  { display: none; }
+  body[data-theme="light"] .icon-moon { display: block; }
+}
+
+/* Hamburger -------------------------------------------------------------- */
+
+.nav-toggle {
+  display: none;                 /* revealed under 768px, see §12 */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 2.6rem;
+  height: 2.6rem;
+  flex: 0 0 auto;
+  border-radius: .8rem;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: transparent;
+  transition: color var(--ease-fast), border-color var(--ease-fast),
+              background-color var(--ease-fast);
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  color: var(--link-hover);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* The icon is drawn in CSS when the button has no visual child of its own. */
+.nav-toggle:not(:has(svg, img, .nav-toggle-bar, span:not(.sr-only)))::before,
+.nav-toggle:not(:has(svg, img, .nav-toggle-bar, span:not(.sr-only)))::after,
+.nav-toggle .nav-toggle-bar,
+.nav-toggle > span:not(.sr-only) {
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 1.15rem;
+  height: 2px;
+  margin-left: -.575rem;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--ease), opacity var(--ease-fast);
+}
+
+/* CSS-drawn variant: two bars + a faked middle bar via box-shadow. */
+.nav-toggle:not(:has(svg, img, .nav-toggle-bar, span:not(.sr-only)))::before {
+  content: "";
+  top: calc(50% - 6px);
+  box-shadow: 0 6px 0 currentColor;   /* middle bar */
+}
+.nav-toggle:not(:has(svg, img, .nav-toggle-bar, span:not(.sr-only)))::after {
+  content: "";
+  top: calc(50% + 6px);
+}
+
+/* Three-span variant. */
+.nav-toggle .nav-toggle-bar:nth-child(1),
+.nav-toggle > span:not(.sr-only):nth-child(1) { top: calc(50% - 7px); }
+.nav-toggle .nav-toggle-bar:nth-child(2),
+.nav-toggle > span:not(.sr-only):nth-child(2) { top: 50%; }
+.nav-toggle .nav-toggle-bar:nth-child(3),
+.nav-toggle > span:not(.sr-only):nth-child(3) { top: calc(50% + 7px); }
+
+/* SVG variant. */
+.nav-toggle > svg,
+.nav-toggle > img {
+  position: static;
+  width: 1.35rem;
+  height: 1.35rem;
+  background: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* Open state → X. */
+.nav-toggle[aria-expanded="true"]:not(:has(svg, img, .nav-toggle-bar, span:not(.sr-only)))::before {
+  top: 50%;
+  box-shadow: none;
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"]:not(:has(svg, img, .nav-toggle-bar, span:not(.sr-only)))::after {
+  top: 50%;
+  transform: rotate(-45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1),
+.nav-toggle[aria-expanded="true"] > span:not(.sr-only):nth-child(1) {
+  top: 50%;
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2),
+.nav-toggle[aria-expanded="true"] > span:not(.sr-only):nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3),
+.nav-toggle[aria-expanded="true"] > span:not(.sr-only):nth-child(3) {
+  top: 50%;
+  transform: rotate(-45deg);
+}
+
+
+/* ==========================================================================
+   07. HERO  (#about)
+   ========================================================================== */
+
+.hero { padding-top: 3.5rem; }
+
+/* Centred column, the way the reference site presents its intro. */
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .25rem;
+}
+
+.avatar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border-solid);
+  box-shadow: var(--shadow-sm);
+  background: var(--card-bg);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Monogram stand-in used until a real portrait is supplied. */
+.avatar-monogram {
+  font-family: var(--font-heading);
+  font-size: 3.6rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--accent);
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+/* The hero is a centred column; #contact reuses .hero-links but stays
+   left-aligned with the rest of that section. */
+.hero-inner .hero-links,
+.hero-inner .hero-cta {
+  justify-content: center;
+}
+
+.hero-name {
+  margin: 0 0 .35rem;
+  color: var(--text-strong);
+}
+
+.hero-role {
+  margin: 0 0 .9rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .01em;
+}
+
+/* Centred box, but the prose itself stays left-aligned — centred multi-line
+   body text is noticeably harder to read. */
+.hero-blurb {
+  margin: .75rem auto 0;
+  max-width: 40rem;
+  text-align: left;
+  color: var(--text);
+}
+
+/* Icon link row (reused by #contact). */
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-links li { margin: 0; }
+
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .95rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--link);
+  font-size: .88rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--ease), color var(--ease-fast),
+              border-color var(--ease-fast), box-shadow var(--ease);
+}
+
+.hero-links a:hover,
+.hero-links a:focus {
+  color: var(--link-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.hero-links svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  margin-top: 1.75rem;
+}
+
+
+/* ==========================================================================
+   08. SKILLS & TAG PILLS
+   ========================================================================== */
+
+/* Multi-column rather than grid: groups have very uneven heights, and a grid
+   leaves a large hole under the short ones. Columns pack them flush. */
+.skill-groups {
+  columns: 3 16rem;
+  column-gap: 2.5rem;
+}
+
+.skill-group {
+  min-width: 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 1.75rem;
+}
+
+.skill-group:last-child { margin-bottom: 0; }
+
+.skill-group-title {
+  margin: 0 0 .6rem;
+  font-size: 1rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .28rem .95rem;
+  border-radius: 999px;
+  background-color: var(--pill);
+  color: var(--pill-text);
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: .01em;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+/* --- Per-language pill colours -------------------------------------------
+   Every combination below clears WCAG AA (4.5:1) for its own text colour.
+   Two of the spec's raw hues could not carry white OR dark text at 4.5:1,
+   so their fills are darkened a step while keeping the hue:
+     #8e79c4 → #7e66bb (default) · #7d7d8d → #737383 (C)
+     #9977d0 → #8860c8 (Cuda)    · #1f9876 → #1b8366 (FastAPI)
+   Pale fills keep their exact spec hue and take dark text (--pill-text-dk).
+   Values are matched case-insensitively; unlisted tags fall back to --pill. */
+
+.tags li[data-tag="Python" i] {
+  background-color: #4bb7b4;             /* dark text 5.9:1 */
+  color: var(--pill-text-dk);
+}
+
+.tags li[data-tag="C++" i],
+.tags li[data-tag="PyTorch" i],
+.tags li[data-tag="Torch" i] {
+  background-color: #f191ab;             /* dark text 6.3:1 */
+  color: var(--pill-text-dk);
+}
+
+.tags li[data-tag="C" i] {
+  background-color: #737383;             /* white 4.66:1 */
+  color: var(--pill-text);
+}
+
+.tags li[data-tag="Cuda" i],
+.tags li[data-tag="CUDA" i] {
+  background-color: #8860c8;             /* white 4.61:1 */
+  color: var(--pill-text);
+}
+
+.tags li[data-tag="TypeScript" i],
+.tags li[data-tag="React Native" i] {
+  background-color: #7f9fd3;             /* dark text 5.3:1 */
+  color: var(--pill-text-dk);
+}
+
+.tags li[data-tag="JavaScript" i] {
+  background-color: #f7de80;             /* dark text 10.6:1 */
+  color: var(--pill-text-dk);
+}
+
+.tags li[data-tag="FastAPI" i] {
+  background-color: #1b8366;             /* white 4.68:1 */
+  color: var(--pill-text);
+}
+
+
+/* ==========================================================================
+   09. TIMELINE  (#experience)
+   Vertical rail in --border with --accent dots; collapses to a plain
+   stacked list under 768px (see §12).
+   ========================================================================== */
+
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 2rem;
+  list-style: none;
+}
+
+/* The rail. */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: .55rem;
+  bottom: .55rem;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--border-solid);
+}
+
+.timeline-item {
+  position: relative;
+  margin: 0 0 2.5rem;
+}
+
+.timeline-item:last-child { margin-bottom: 0; }
+
+/* The dot. */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  top: .55rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  align-items: baseline;
+  margin-bottom: .2rem;
+}
+
+.timeline-date {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.timeline-role {
+  margin: 0 0 .15rem;
+  color: var(--text-strong);
+  font-size: 1.2rem;
+}
+
+.timeline-org {
+  margin: 0 0 .7rem;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: .95rem;
+}
+
+.timeline-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline-points li {
+  position: relative;
+  padding-left: 1.15rem;
+  margin-bottom: .4rem;
+}
+
+.timeline-points li:last-child { margin-bottom: 0; }
+
+.timeline-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .78em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: .6;
+}
+
+
+/* ==========================================================================
+   10. CARDS  (#projects)
+   150px fixed image column left, text right; stacks under 768px (see §12).
+   ========================================================================== */
+
+.card-list {
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 1.4rem;
+  padding: 1.4rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform var(--ease), box-shadow var(--ease),
+              border-color var(--ease-fast);
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-solid);
+}
+
+/* Fixed square thumbnail pinned to the top of the card. Stretching it to the
+   card's full height made every card a different shape, because the write-ups
+   differ in length. */
+.card-media {
+  flex: 0 0 var(--media-col);
+  width: var(--media-col);
+  height: var(--media-col);
+  display: block;
+  border-radius: 1rem;
+  overflow: hidden;
+  text-decoration: none;
+  background: var(--bg-tint);
+  align-self: flex-start;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-strong);
+  text-decoration: none;
+  line-height: 1.3;
+}
+
+.card-title:hover,
+.card-title:focus {
+  color: var(--link-hover);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--link-line-hi);
+  text-underline-offset: .2em;
+}
+
+.external-icon {
+  display: inline-flex;
+  width: .8em;
+  height: .8em;
+  flex: 0 0 auto;
+  opacity: .7;
+}
+
+.external-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card-date,
+.card-credit {
+  display: inline-block;
+  font-size: .8rem;
+  color: var(--text-muted);
+  letter-spacing: .02em;
+}
+
+.card-date { margin-right: .75rem; }
+
+.card-date + .card-credit::before {
+  content: "·";
+  margin-right: .75rem;
+  opacity: .6;
+}
+
+.card-desc {
+  margin: .6rem 0 0;
+  color: var(--text);
+}
+
+.card .tags { margin-top: auto; padding-top: 1rem; }
+
+
+/* ==========================================================================
+   11. CONTACT & FOOTER
+   ========================================================================== */
+
+#contact p { max-width: 42rem; }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0;
+  text-align: center;
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+
+.site-footer p { margin: 0; }
+
+.site-footer a { color: var(--link); }
+
+
+/* ==========================================================================
+   12. RESPONSIVE
+   Verified for 360 / 768 / 1024 / 1440 with no horizontal scroll.
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  :root { --gutter: 1.5rem; }
+  .section { padding: 3.75rem 0; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 4.25rem;
+    --gutter: 1.25rem;
+  }
+
+  /* --- Nav collapses to a hamburger panel --- */
+  .nav-toggle { display: inline-flex; }
+
+  .site-nav > .container { position: relative; flex-wrap: nowrap; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: .5rem var(--gutter) 1rem;
+    background: var(--nav-bg);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+
+    /* closed */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-.5rem);
+    pointer-events: none;
+    transition: opacity var(--ease-fast), transform var(--ease-fast),
+                visibility var(--ease-fast);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .nav-links { background: var(--bg); }
+  }
+
+  .nav-links.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-toggle[aria-expanded="true"] + .nav-links,
+  .nav-toggle[aria-expanded="true"] ~ .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    display: block;
+    padding: .75rem .5rem;
+    border-radius: .6rem;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links li:last-child .nav-link { border-bottom: 0; }
+
+  /* --- Hero stacks and centres --- */
+  .hero { padding-top: 2.5rem; }
+
+  .hero-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .hero-links,
+  .hero-cta { justify-content: center; }
+
+  .hero-blurb { text-align: left; }
+
+  /* --- Timeline degrades to a plain stacked list --- */
+  .timeline { padding-left: 0; }
+  .timeline::before { display: none; }
+
+  .timeline-item {
+    padding: 0 0 0 1rem;
+    border-left: 2px solid var(--border-solid);
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item::before {
+    left: -7px;
+    top: .6rem;
+    width: 10px;
+    height: 10px;
+  }
+
+  /* --- Cards stack, image becomes a capped-height banner --- */
+  .card {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.1rem;
+  }
+
+  .card-media {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 190px;
+    max-height: 190px;
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 190px;
+    max-height: 190px;
+  }
+
+  .section { padding: 3rem 0; }
+  .section-title { margin-bottom: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 15.5px; }
+
+  .avatar { width: 118px; height: 118px; }
+
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; }
+
+  .skill-groups { columns: 1; }
+
+  .card-media,
+  .card-media img { max-height: 160px; }
+  .card-media img { height: 160px; }
+}
+
+@media (max-width: 360px) {
+  :root { --gutter: 1rem; }
+  .nav-title { font-size: .95rem; letter-spacing: .06rem; }
+  .tags li { font-size: .74rem; padding: .25rem .8rem; }
+}
+
+
+/* ==========================================================================
+   13. REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* No lift / rotate affordances. */
+  .card:hover,
+  .card:focus-within,
+  .btn:hover,
+  .btn:focus-visible,
+  .hero-links a:hover,
+  .hero-links a:focus,
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible { transform: none; }
+}
+
+
+/* ==========================================================================
+   14. PRINT — readable black on white, chrome removed
+   ========================================================================== */
+
+@media print {
+  :root,
+  html[data-theme="dark"],
+  body[data-theme="dark"] {
+    --bg: #ffffff;
+    --bg-tint: #ffffff;
+    --card-bg: #ffffff;
+    --text: #000000;
+    --text-strong: #000000;
+    --text-muted: #333333;
+    --heading: #000000;
+    --accent: #000000;
+    --accent-hover: #000000;
+    --accent-soft: transparent;
+    --link: #000000;
+    --link-hover: #000000;
+    --link-line: #000000;
+    --border: #999999;
+    --border-solid: #666666;
+    --shadow: none;
+    --shadow-sm: none;
+    --shadow-lg: none;
+    --heading-glow: none;
+    --pill: transparent;
+    --pill-text: #000000;
+    --pill-text-dk: #000000;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #000 !important;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  .site-nav,
+  .nav-toggle,
+  .theme-toggle,
+  .hero-cta { display: none !important; }
+
+  .container { max-width: none; padding: 0; }
+
+  .section {
+    padding: 1rem 0;
+    border-top: 1px solid #999;
+    break-inside: avoid;
+  }
+
+  .section-title::after { background: #000; }
+
+  .card,
+  .timeline-item {
+    box-shadow: none !important;
+    border: 1px solid #999;
+    break-inside: avoid;
+    transform: none !important;
+  }
+
+  .card { page-break-inside: avoid; }
+
+  .card-media { display: none; }
+
+  .tags li {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #666;
+    box-shadow: none !important;
+  }
+
+  .avatar { border-color: #666; box-shadow: none; }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* Expand real URLs behind links, but not in-page anchors. */
+  .hero-links a[href^="http"]::after,
+  .card-title[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: .85em;
+    word-break: break-all;
+  }
+
+  .site-footer { border-top: 1px solid #999; }
+}

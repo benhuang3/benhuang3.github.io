@@ -1,0 +1,37 @@
+# Skills shown on the site, grouped by category.
+# Every item below is a technology that actually appears in one of the
+# projects in _projects/ — nothing here is aspirational.
+
+- name: Languages
+  items:
+    - Python
+    - C
+    - C++
+    - CUDA
+    - TypeScript
+
+- name: ML & Data
+  items:
+    - PyTorch
+    - Neural Radiance Fields (NeRF)
+    - Nerfstudio
+    - Mask2Former
+    - Reinforcement Learning
+    - Evo2 (genomic foundation models)
+
+- name: Web & Backend
+  items:
+    - FastAPI
+    - React Native
+    - Expo
+
+- name: Tools & Infra
+  items:
+    - GPU programming
+    - Git & GitHub
+    - Jekyll / GitHub Pages
+
+# TODO: add anything missing — this list only covers what is evidenced by the
+# five projects on the site. Languages, frameworks, databases, cloud platforms
+# and tools you have used elsewhere (coursework, internships, side projects)
+# should be added here.
